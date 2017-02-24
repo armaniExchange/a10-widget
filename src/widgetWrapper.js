@@ -48,26 +48,38 @@ export const widgetWrapper = ReduxDataConnector => {
           invalid, action
         } = this.props;
 
-        const componentMeta = {
-          meta: {
-            endpoint:action,
-            // schema: typeof schema === 'string' ? require(`../../schemas/${schema}.json`) : schema, 
-            name, value, loadInitial,
-            conditional, validation, urlParams, invalid, ...meta
-          }
-        };
-
         this.parentInstancePath = this.defaultPageInstancePath;
         if (this.context && this.context.props) {
           this.parentInstancePath = this.context.props.instancePath;
         }
-        this.wm.registerComponent(this.instancePath, this.parentInstancePath, componentMeta);
-        // this.wm.printwidgetTree(true);
-        // this.wm.acceptBalls();
-        this.executePluginMethod('onInitialize');
-        // console.log(this.context.props);
-      }
 
+        const initFromSchema = (schema) => {
+          const componentMeta = {
+            meta: {
+              endpoint:action,
+              schema, 
+              name, value, loadInitial,
+              conditional, validation, urlParams, invalid, ...meta
+            }
+          };
+
+          this.wm.registerComponent(this.instancePath, this.parentInstancePath, componentMeta);
+          // this.wm.printwidgetTree(true);
+          // this.wm.acceptBalls();
+          this.executePluginMethod('onInitialize');
+          // console.log(this.context.props);
+        };
+
+        if(typeof schema === 'string') {
+          System.import('a10-schemas').then((schemas)=>{
+            initFromSchema(schemas[schema]);
+          });
+        } else {
+          initFromSchema(schema);
+        }
+        
+      }
+ 
       registerPlugins() {
         if (__DEV__) { // eslint-disable-line
           this.plugins = WidgetPlugin.devPlugins.map((Plugin) => {

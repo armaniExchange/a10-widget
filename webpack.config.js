@@ -30,7 +30,8 @@ var config = {
   externals: {
     'react': reactExternal,
     'redux': reduxExternal,
-    'react-redux': reactReduxExternal
+    'react-redux': reactReduxExternal,
+    'a10-schemas': 'a10-schemas'
   },
   module: {
     loaders: [
