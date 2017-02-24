@@ -8,7 +8,6 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    // 'bootstrap-loader',
     'babel-polyfill',
     // 'eventsource-polyfill', // necessary for hot reloading with IE
     './index'

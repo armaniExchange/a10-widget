@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// import Redirect from 'react-router/Redirect';
 
 import { Form } from 'react-bootstrap';
 // import invariant from 'invariant';
