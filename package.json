@@ -10,6 +10,7 @@
     "build:lib": "babel src --out-dir lib",
     "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/index.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/index.min.js",
+    "preinstall": "better-npm-run build",
     "clean": "rimraf dist lib",
     "example:A10Field": "node examples/A10Field/devServer.js",
     "prepublish": "npm run clean && npm run build",
