@@ -51,7 +51,7 @@ export const widgetWrapper = ReduxDataConnector => {
         const componentMeta = {
           meta: {
             endpoint:action,
-            schema: typeof schema === 'string' ? require(`../../schemas/${schema}.json`) : schema, 
+            // schema: typeof schema === 'string' ? require(`../../schemas/${schema}.json`) : schema, 
             name, value, loadInitial,
             conditional, validation, urlParams, invalid, ...meta
           }

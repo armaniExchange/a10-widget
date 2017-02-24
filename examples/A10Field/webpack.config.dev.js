@@ -28,10 +28,7 @@ module.exports = {
       __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production')
     }),
     new webpack.ProvidePlugin({
-      Promise: 'es6-promise-promise', // works as expected
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
+      Promise: 'es6-promise-promise' // works as expected
     })
   ],
   resolve: {

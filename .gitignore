@@ -9,3 +9,4 @@ __nogit
 .tmp
 builds
 /yarn.lock
+dist
