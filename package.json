@@ -45,6 +45,7 @@
     }
   },
   "devDependencies": {
+    "a10-schemas": "git+https://github.com/armaniExchange/a10-schemas.git",
     "babel-core": "^6.6.5",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
@@ -151,20 +152,7 @@
     "react": "^15.3.2",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
-    "redux-immutable": "^3.0.8"
-  },
-  "files": [
-    "README.md",
-    "dist"
-  ],
-  "npmName": "a10-widget",
-  "npmFileMap": [
-    {
-      "basePath": "/dist/",
-      "files": [
-        "*.js",
-        "*.css"
-      ]
-    }
-  ]
+    "redux-immutable": "^3.0.8",
+    "a10-schemas": "git+https://github.com/armaniExchange/a10-schemas.git"
+  }
 }

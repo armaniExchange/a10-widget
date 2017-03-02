@@ -71,7 +71,7 @@ export const widgetWrapper = ReduxDataConnector => {
         };
 
         if(typeof schema === 'string') {
-          System.import('a10-schemas').then((schemas)=>{
+          System.import(`a10-schemas/src/${schema}.json`).then((schemas)=>{
             initFromSchema(schemas[schema]);
           });
         } else {
