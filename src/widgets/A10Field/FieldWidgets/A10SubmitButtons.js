@@ -17,7 +17,7 @@ export class A10SubmitButtons extends Component {
         <Button type="button" disabled={pristine || submitting} onClick={::this.close} key={index} >
           Cancel
         </Button>
-      );
+      ); 
     },
     reset: ({ pristine, submitting }, index) => {
       return (

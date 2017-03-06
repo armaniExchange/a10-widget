@@ -5,4 +5,5 @@ export * from './A10Radios';
 export * from './A10Select';
 export * from './A10TagInput';
 export * from './A10MultiSelect';
+export * from './A10SubmitButtons';
 // export * from './AutoField';

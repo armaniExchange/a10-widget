@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
-import { A10MultiField } from '../../../src/widgets/A10Field/FieldWidgets';
+import { A10MultiField, A10SubmitButtons } from '../../../src/widgets/A10Field/FieldWidgets';
 
 import { Col, Row, Panel, FormControl, Checkbox } from 'react-bootstrap';
-import { A10SubmitButtons } from '../../../../client/components/Form/A10SubmitButtons';
 
 import { A10Field, A10Form, widgetWrapper } from '../../../src/index';
 

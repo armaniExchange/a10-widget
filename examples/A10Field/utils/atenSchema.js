@@ -1,5 +1,5 @@
 
-import SchemaAnalysis from '../../../../generator/utils/SchemaAnalysis';
+import SchemaAnalysis from '../../../../a10-gui-5.x/generator/utils/SchemaAnalysis';
 
 const getSchema = (name) => {
   console.log(`get schema of ${name}`);
@@ -7,7 +7,7 @@ const getSchema = (name) => {
     if (!name) {
       resolve({});
     }
-    System.import(`../../../../schemas/${name}.json`).then(module => {
+    System.import(`a10-schemas/src/${name}.json`).then(module => {
       const sa = new SchemaAnalysis(name, module);
       console.log(module);
       resolve({

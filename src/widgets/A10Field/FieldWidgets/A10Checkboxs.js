@@ -11,7 +11,7 @@ export class A10Checkboxs extends Component {
 
     // console.log(value);
 
-    return (
+    return ( 
       <FormGroup>
       {
         options.map(({ label, value:optionValue }, index) => {
