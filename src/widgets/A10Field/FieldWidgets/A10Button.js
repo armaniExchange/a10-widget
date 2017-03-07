@@ -14,11 +14,15 @@ class _A10Button extends Component {
   static contextTypes = {
     props: PropTypes.object,
     context: PropTypes.object
-  }
+  };
 
   state = {
     visible: false
-  }
+  };
+
+  static defaultProps  = {
+    popup: {}
+  };
 
   constructor(props, context) {
     super(props, context);
