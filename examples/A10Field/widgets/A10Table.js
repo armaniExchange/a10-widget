@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { A10Table, A10TableColumn } from '../../../src/widgets/A10Table';
-
-import StandardPageLayout from '../../../src/layouts/PageLayout';
-import { widgetWrapper } from 'widgetWrapper';
+import { StandardPageLayout, A10Table, A10TableColumn, widgetWrapper } from '../../../dist';
 
 class MyA10Table extends Component {
 
@@ -10,7 +7,7 @@ class MyA10Table extends Component {
     fieldName: [],
     fieldTitle: [],
     primaryField: ''
-  }; 
+  };
 
   renderFields() {
     const { fieldName, fieldTitle, primaryField } = this.props;

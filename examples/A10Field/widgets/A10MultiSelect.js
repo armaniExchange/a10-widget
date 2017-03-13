@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { widgetWrapper } from 'widgetWrapper';
-import { A10MultiSelect } from '../../../src/widgets/A10Field/FieldWidgets';
+import { A10MultiSelect, widgetWrapper } from '../../../dist';
 
 function MyA10MultiSelect({ ...props }) {
   let validProps = {};

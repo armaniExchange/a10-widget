@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 
 export default widgetWrapper()(FormGroup, {

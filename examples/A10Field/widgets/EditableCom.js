@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 // import { BootstrapTable } from 'react-bootstrap-table';  // in ECMAScript 6
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import { FormControl, FormGroup, ControlLabel, Row, Col, Button, HelpBlock } from 'react-bootstrap';
 
 class EditableCom extends React.Component {
@@ -27,17 +27,17 @@ class EditableCom extends React.Component {
 
   render() {
     // console.log(this.props);
-    const { 
-      title, 
-      invalid:readonly, 
-      instanceData: { errorMsg }, 
+    const {
+      title,
+      invalid:readonly,
+      instanceData: { errorMsg },
       style,
       className
     } = this.props;
 
     return (
       <FormGroup style={style} className={className}>
-        {this.props.children} 
+        {this.props.children}
         <Row>
           <Col componentClass={ControlLabel}  sm={2} title={title}>{title}</Col>
           <Col sm={6}>

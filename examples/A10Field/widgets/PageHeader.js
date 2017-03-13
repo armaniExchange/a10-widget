@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 
 export default widgetWrapper()(PageHeader, {

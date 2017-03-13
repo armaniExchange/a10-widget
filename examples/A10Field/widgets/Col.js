@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import Col from 'react-bootstrap/lib/Col';
 
 export default widgetWrapper()(Col, {

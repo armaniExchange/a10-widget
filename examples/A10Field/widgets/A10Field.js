@@ -1,16 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import A10Field from '../../../src/widgets/A10Field';
-import { Col, Row, Panel, Radio, Checkbox, FormControl } from 'react-bootstrap';
+import { A10Field } from '../../../dist';
+import { widgetWrapper } from '../../../dist';
 
-import { widgetWrapper } from 'widgetWrapper';
 
-function MyA10Input({ ...props }) {
-  return (
-    <A10Field {...props}/>
-  );
-}
-
-export default widgetWrapper(['app'])(MyA10Input, {
+export default widgetWrapper([ 'app' ])(A10Field, {
   meta: {
     widget: {
       iconClassName: 'fa fa-rocket',
@@ -31,7 +24,11 @@ export default widgetWrapper(['app'])(MyA10Input, {
     propTypes: Object.assign({}, A10Field.propTypes, {
       name: PropTypes.object.isRequired,
       label: PropTypes.object.isRequired,
-      conditional: PropTypes.object,
+      conditional: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+        PropTypes.bool
+      ]),
       layout: PropTypes.element
     }),
     propGroups: {

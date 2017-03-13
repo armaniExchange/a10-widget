@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 
 function RootWidget({ children }) {
   return (

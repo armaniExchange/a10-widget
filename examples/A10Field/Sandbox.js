@@ -18,6 +18,11 @@ import LeftPanel from './components/LeftPanel';
 import MainPanel from './components/MainPanel'; 
 import editableUtils from './utils/editableUtils';
 
+import { registerWidgetPlugins } from '../../dist';
+import { SchemaPlugin } from '../../../a10-widget-lib';
+
+registerWidgetPlugins([ SchemaPlugin ]);
+
 const urlParams = {
   'name': 'vs2',
   'port-number': 80,
@@ -65,6 +70,24 @@ const noSchemaData = {
 const reactSchemaSource = {
   _componentId: 'root',
   component: 'RootWidget',
+  schemaChildren: [
+    {
+      component: "A10Form",
+      name: "SlbCommonConnRateLimitForm",
+      schema: "slb-common-conn-rate-limit",
+      horizontal: true,
+      schemaChildren: [
+        {
+          component: "A10Field",
+          name: "conn-rate-limit.src-ip-list",
+          label: "Src Ip List"
+        },
+        {
+          component: "A10SubmitButtons"
+        }
+      ]
+    }
+  ],
   _isRoot: true
 };
 

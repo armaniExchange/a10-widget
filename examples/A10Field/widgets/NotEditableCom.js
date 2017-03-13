@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 // import { BootstrapTable } from 'react-bootstrap-table';  // in ECMAScript 6
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 // import { Panel } from 'react-bootstrap';
 
 
@@ -45,8 +45,8 @@ class NotEditableCom extends React.Component {
 
 
 
-export default Object.assign(widgetWrapper([ 'app' ])(NotEditableCom), { 
-  editableProps : { 
+export default Object.assign(widgetWrapper([ 'app' ])(NotEditableCom), {
+  editableProps : {
     title: PropTypes.string,
     number: PropTypes.number,
     answer: PropTypes.bool

@@ -83,10 +83,10 @@ var config = {
     library: 'a10-widget',
     libraryTarget: 'umd'
   },
+  devtool: 'cheap-module-eval-source-map',
   resolve: {
     extensions: [ '.json', '.js', '.jsx' ],
     modules: [
-      'src',
       'node_modules'
     ]
   },

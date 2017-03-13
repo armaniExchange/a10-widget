@@ -1,4 +1,4 @@
-import { GridView } from '../../../src/widgets/A10GridView';
+import { A10GridView as GridView } from '../../../dist';
 
 export default (name, options = [33, 33, 33]) => {
   const child = [];

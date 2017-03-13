@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 function CustomizedDropdownButton({ ...props }) {

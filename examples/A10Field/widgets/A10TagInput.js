@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { widgetWrapper } from 'widgetWrapper';
-import { A10TagInput } from '../../../src/widgets/A10Field/FieldWidgets';
+import { A10TagInput, widgetWrapper } from '../../../dist';
 
 export default widgetWrapper([ 'app' ])(A10TagInput, {
   meta: {

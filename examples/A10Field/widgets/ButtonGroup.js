@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 
 export default widgetWrapper()(ButtonGroup, {

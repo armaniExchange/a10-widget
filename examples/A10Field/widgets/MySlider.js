@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Slider from 'rc-slider';
 
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import 'rc-slider/assets/index.css';
 
 class MySlider extends Component {
@@ -20,7 +20,7 @@ class MySlider extends Component {
 
   render() {
     return (
-      <Slider {...this.props} style={{ margin: 0 }} />      
+      <Slider {...this.props} style={{ margin: 0 }} />
     );
   }
 

@@ -28,6 +28,7 @@ class A10Field extends React.Component {
       PropTypes.bool
     ]),
     conditional: PropTypes.oneOfType([
+      PropTypes.string,
       PropTypes.object,
       PropTypes.bool
     ]),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import Radio from 'react-bootstrap/lib/Radio';
 
 export default widgetWrapper()(Radio, {

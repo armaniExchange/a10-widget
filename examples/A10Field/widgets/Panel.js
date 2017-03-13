@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import Panel from 'react-bootstrap/lib/Panel';
 
 export default widgetWrapper()(Panel, {

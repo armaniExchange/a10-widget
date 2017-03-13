@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import A10Field from '../../../src/widgets/A10Field';
-import { Col, Row, Panel, Radio, Checkbox, FormControl } from 'react-bootstrap';
-
-import { widgetWrapper } from 'widgetWrapper';
+import { FormControl } from 'react-bootstrap';
+import { A10Field, widgetWrapper } from '../../../dist';
 
 function MyA10Select({ ...props }) {
   const fieldProps = { ...props };

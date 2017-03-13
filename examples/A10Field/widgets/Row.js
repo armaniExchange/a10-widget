@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import Row from 'react-bootstrap/lib/Row';
 
 export default widgetWrapper()(Row, {

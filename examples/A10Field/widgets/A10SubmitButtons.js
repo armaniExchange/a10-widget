@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { widgetWrapper } from 'widgetWrapper';
-import { A10SubmitButtons } from '../../../src/widgets/A10Field/FieldWidgets/A10SubmitButtons';
+import { A10SubmitButtons, widgetWrapper } from '../../../dist';
 
 function MyA10SubmitButtons({ ...props }) {
-  let newProps = {}; 
+  let newProps = {};
   return (
     <div className="editable-component-wrapper">
       {props.children}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 
 export default widgetWrapper()(ButtonToolbar, {

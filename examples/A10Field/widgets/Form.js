@@ -1,5 +1,5 @@
 import React from 'react';
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import Form from 'react-bootstrap/lib/Form';
 
 export default widgetWrapper()(Form, {

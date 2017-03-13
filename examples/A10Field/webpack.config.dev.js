@@ -5,7 +5,7 @@ var LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 module.exports = {
   // context: path.join(__dirname, '../../'),
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
     'babel-polyfill',
@@ -33,7 +33,6 @@ module.exports = {
   resolve: {
     extensions: [ '.json', '.js', '.jsx' ],
     modules: [
-      'src',
       'node_modules'
     ]
   },

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 // import { BootstrapTable } from 'react-bootstrap-table';  // in ECMAScript 6
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 import { FormGroup, ControlLabel, Col, Checkbox } from 'react-bootstrap';
 
 class FieldCheckbox extends React.Component {

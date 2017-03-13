@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import A10Form from '../../../src/widgets/A10Form';
+import { A10Form } from '../../../dist';
 
-import { widgetWrapper } from 'widgetWrapper';
+import { widgetWrapper } from '../../../dist';
 
 export default widgetWrapper()(A10Form, {
   meta: {
@@ -16,7 +16,7 @@ export default widgetWrapper()(A10Form, {
     },
     defaultProps: {
       schema: 'slb-virtual-server',
-      redirect: { path: 'list' }, 
+      redirect: { path: 'list' },
       horizontal: true
     },
     propTypes: Object.assign({}, A10Form.propTypes, {
