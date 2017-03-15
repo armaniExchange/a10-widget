@@ -4,7 +4,7 @@ import Panel from 'react-bootstrap/lib/Panel';
 import PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import Select from 'react-select';
 
-import allSchemas from 'a10-schemas/all-schemas.json';
+import allSchemas from '../../../../a10-schemas/all-schemas.json';
 
 export default class LeftPanelSchema extends React.Component {
   static propTypes = {

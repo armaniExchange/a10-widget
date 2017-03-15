@@ -6,53 +6,25 @@ export default {
     component: 'RootWidget',
     schemaChildren: [
       {
-        component: 'Panel',
-        header: 'Login',
+        component: "A10Form",
+        name: "Auth",
+        schema: "auth",
+        horizontal: true,
         schemaChildren: [
           {
-            component: 'Form',
-            horizontal: true,
-            schemaChildren: [
-              {
-                label: 'User',
-                component: 'FieldGroup'
-              },
-              {
-                label: 'Password',
-                type: 'password',
-                component: 'FieldGroup'
-              },
-              {
-                component: 'FormGroup',
-                schemaChildren: [
-                  {
-                    component: 'Col',
-                    xs: 12,
-                    schemaChildren: [
-                      {
-                        component: 'ButtonToolbar',
-                        className: 'pull-right',
-                        schemaChildren: [
-                          {
-                            component: 'Button',
-                            bsStyle: 'primary',
-                            schemaChildren: 'Log in'
-                          },
-                          {
-                            component: 'Button',
-                            schemaChildren: 'Cancel'
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-
-              }
-            ]
+            component: "A10Field",
+            name: "crenditial.username",
+            label: "Username"
+          },
+          {
+            component: "A10Field",
+            name: "crenditial.password",
+            label: "Password"
+          },
+          {
+            component: "A10SubmitButtons"
           }
         ]
-
       }
     ]
   }
