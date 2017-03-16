@@ -7,18 +7,18 @@ export default {
     schemaChildren: [
       {
         component: "A10Form",
-        name: "Auth",
+        name: "AuthForm",
         schema: "auth",
         horizontal: true,
         schemaChildren: [
           {
             component: "A10Field",
-            name: "crenditial.username",
+            name: "credentials.username",
             label: "Username"
           },
           {
             component: "A10Field",
-            name: "crenditial.password",
+            name: "credentials.password",
             label: "Password"
           },
           {
