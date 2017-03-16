@@ -74,8 +74,8 @@ module.exports = {
         loader: 'file-loader'
       },
       {
-        test: /\.(md|html)/,
-        loaders: [ "html-loader", "markdown-loader" ]
+        test: /\.(html)/,
+        loaders: [ "html-loader" ]
       }
     ]
   }

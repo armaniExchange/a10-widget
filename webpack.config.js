@@ -26,12 +26,19 @@ var reactReduxExternal = {
   amd: 'react-redux'
 }
 
+var reactDomExternal = {
+  root: 'ReactDOM',
+  commonjs2: 'react-dom',
+  commonjs: 'react-dom',
+  amd: 'react-dom',
+}
+
 var config = {
   externals: {
     'react': reactExternal,
     'redux': reduxExternal,
     'react-redux': reactReduxExternal,
-    'a10-schemas': 'a10-schemas'
+    'react-dom': reactDomExternal
   },
   module: {
     loaders: [
