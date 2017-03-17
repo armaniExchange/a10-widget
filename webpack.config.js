@@ -90,7 +90,7 @@ var config = {
     library: 'a10-widget',
     libraryTarget: 'umd'
   },
-  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'cheap-module-eval-source-map',
   resolve: {
     extensions: [ '.json', '.js', '.jsx' ],
     modules: [
