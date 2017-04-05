@@ -106,12 +106,10 @@ class A10Form extends Component {
   recursiveCloneA10Field(child) {
     const data = this.state.data;
     return React.Children.map(child, ele => {
-      console.log(ele);
       if (!React.isValidElement(ele)) {
         return ele;
       } else if (Object.getPrototypeOf(ele.type) == A10BaseField) {
         const { conditional, linkFrom, linkTo, value, name } = ele.props;
-        console.log(conditional, name);
         if (conditional && !this.checkConditional(conditional)) return null;
         const currentVal = data.getIn(name.split('.'));
         const newProps = {
