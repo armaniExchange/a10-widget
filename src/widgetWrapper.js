@@ -57,7 +57,7 @@ export const widgetWrapper = ReduxDataConnector => {
           const componentMeta = {
             meta: {
               endpoint:action,
-              schema, 
+              schema,
               name, value, loadInitial,
               conditional, validation, urlParams, invalid, ...meta
             }
@@ -71,13 +71,13 @@ export const widgetWrapper = ReduxDataConnector => {
         };
 
         if(typeof schema === 'string') {
-          initFromSchema(require(`a10-schemas/src/${schema}.json`));
+          // initFromSchema(require(`a10-schemas/src/${schema}.json`));
         } else {
           initFromSchema(schema);
         }
-        
+
       }
- 
+
       registerPlugins() {
         if (__DEV__) { // eslint-disable-line
           this.plugins = WidgetPlugin.devPlugins.map((Plugin) => {
@@ -227,8 +227,8 @@ export const widgetWrapper = ReduxDataConnector => {
         // console.log(thisComInstanceData);
         const defaultCheckFields = [ 'data', 'activeData', 'visible', 'errorMsg', 'invalid', 'submitErrors', 'children' ];
         const needUpdateFields = this.props.updateFields || defaultCheckFields;
-        return this.checkComponentNeedUpdate(needUpdateFields, 
-          { ...nextComInstanceData, children: nextProps.children }, 
+        return this.checkComponentNeedUpdate(needUpdateFields,
+          { ...nextComInstanceData, children: nextProps.children },
           { ...thisComInstanceData, children: this.props.children });
       }
 

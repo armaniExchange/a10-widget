@@ -1,79 +1,159 @@
 import React, { Component, PropTypes } from 'react';
-
 import { Form } from 'react-bootstrap';
-// import invariant from 'invariant';
-import widgetWrapper from '../../widgetWrapper';
-import { UPDATE_TARGET_DATA, HIDE_COMPONENT_MODAL, REDIRECT_ROUTE } from '../../consts/messages'; // eslint-disable-line
+import { Map, fromJS } from 'immutable';
+
+import A10BaseField from '../A10Field/A10BaseField';
 
 class A10Form extends Component {
-  static displayName = 'A10Form'
+
+  static displayName = 'A10Form';
+
   static contextTypes = {
-    props: PropTypes.object,
-    ballKicker: PropTypes.object
-  }
+    apiClient: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired
+  };
+
+  static defaultProps = {
+    children: [null, null]
+  };
 
   static propTypes = {
-    schema: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string
-    ]).isRequired,
-    redirect: PropTypes.object,
-    horizontal: PropTypes.bool
-  }
+    ...Form.propTypes,
+    children: PropTypes.any.isRequired,
+    primaryId: PropTypes.string,
+    action: PropTypes.string,
+    method: PropTypes.string,
+    params: PropTypes.object,
+    onSuccess: PropTypes.func,
+    onFail: PropTypes.func
+  };
 
-  // static componentId = uniqueId('A10Form-')
-  onSubmit(event) {
-    event.preventDefault();
-
-    const onSuccess = () => {
-      const { data, kickBall, redirect } = this.props;
-      const { modal, targetInstancePath, parentPath: parentInstancePath } = this.context.props;
-      if (data && data.signature && modal) {
-        // console.log(data);
-        kickBall(UPDATE_TARGET_DATA);
-        return false;
-      } else if (modal) {
-        kickBall(UPDATE_TARGET_DATA, data, targetInstancePath );
-        kickBall(HIDE_COMPONENT_MODAL, null, parentInstancePath);
-      } else {
-        kickBall(REDIRECT_ROUTE, redirect || '/');
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: Map()
     };
-    this.props.modelSave(onSuccess.bind(this));
+    this.fieldCount = 0;
   }
 
-  componentWillUpdate() {
-    // console.log('mount.......');
-    const { initial } = this.context.props;
-    // console.log('Parent Path:', node.model.instancePath, 'A10Form path:', this.props.node.model.instancePath);
-    if (initial) {
-      this.props.modelInitializeChildren(initial);
+  onSubmit = e => {
+    e.preventDefault(); e.stopPropagation();
+    const { onSubmit } = this.props;
+    const { data } = this.state;
+
+    let result = Map();
+    for (let i = 0; i < this.fieldCount; i++) {
+      const ele = this.refs[`field${i}`];
+      const { name, value: defaultValue, notRegular } = ele.props;
+      const key = name.split('.');
+      const value = data.getIn(key);
+      if (!value || notRegular) continue;
+      if (typeof value === 'string' && value.length === 0) continue;
+      result = result.setIn(key, value);
+    }
+    result = result.toJS();
+
+    if (onSubmit) {
+      onSubmit(result, e);
     } else {
-      // TODO: load from URL
+      const { apiClient } = this.context;
+      const { action, method, onSuccess, params, primaryId } = this.props;
+      const url = primaryId ? `${action}${primaryId}` : action;
+      apiClient[method](url, result, params).then(res => {
+        onSuccess(res);
+      });
+    }
+  };
+
+  updateField = (e, name, value, defaultVal) => {
+    this.setState({
+      data: this.state.data.setIn(name.split('.'), value)
+    });
+  }
+
+  checkConditional = (conditional) => {
+    const { data } = this.state;
+    for (const key in conditional) {
+      if (!conditional.hasOwnProperty(key)) continue;
+      const currentVal = data.getIn(key.split('.'));
+      // FIXME
+      if (currentVal != conditional[key] &&
+        !(currentVal == undefined && conditional[key] == false)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  initData = child => {
+    let { data } = this.state;
+    for (let i = 0; i < this.fieldCount; i++) {
+      const ele = this.refs[`field${i}`];
+      const { name, value } = ele.props;
+      data = data.setIn(name.split('.'), value || ele.value);
+    }
+    this.setState({ data });
+  }
+
+  recursiveCloneA10Field(child) {
+    const data = this.state.data;
+    return React.Children.map(child, ele => {
+      console.log(ele);
+      if (!React.isValidElement(ele)) {
+        return ele;
+      } else if (Object.getPrototypeOf(ele.type) == A10BaseField) {
+        const { conditional, linkFrom, linkTo, value, name } = ele.props;
+        if (conditional && !this.checkConditional(conditional)) return null;
+        const currentVal = data.getIn(name.split('.'));
+        const newProps = {
+          onChange: this.updateField,
+          ref: `field${this.fieldCount++}`,
+          value: currentVal || value || ''
+        };
+        // console.log(name, currentVal, name.split('.'), data);
+        // if (linkFrom) {
+        //   newProps.linkData[linkTo] = this.state.data.getIn(linkFrom.split('.'));
+        // }
+        return React.cloneElement(ele, newProps);
+      } else if (ele.props.children) {
+        return React.cloneElement(ele, {
+          children: this.recursiveCloneA10Field(ele.props.children)
+        });
+      }
+      return ele;
+    });
+  }
+
+  componentDidUpdate() {
+    // console.log(this.state.data.toJS());
+  }
+
+  componentWillMount() {
+    const { primaryId, action } = this.props;
+    if (primaryId) {
+      const { apiClient } = this.context;
+      apiClient.get(`${action}/${primaryId}`).then(res => {
+        this.setState({
+          data: fromJS(res)
+        });
+      });
     }
   }
 
+  componentDidMount() {
+    this.initData(this.props.children);
+  }
+
   render() {
-    let {
-      // Form props
-      bsClass,
-      children,
-      componentClass,
-      horizontal,
-      inline,
-      onSubmit
-    } = this.props;
-
-    if (!onSubmit) onSubmit = ::this.onSubmit;
-    // console.log(this.context.props);
-
-    const formProps = { bsClass, componentClass, horizontal, inline, onSubmit };
+    const { children, horizontal, inline } = this.props;
+    this.fieldCount = 0;
     return (
-      <Form { ...formProps }>
-        { children }
+      <Form horizontal={horizontal} inline={inline} onSubmit={this.onSubmit}>
+        <div key="1" className="fields-container">{children && this.recursiveCloneA10Field(children[0])}</div>
+        <div key="2" className="button-container">{children && children[1]}</div>
       </Form>
     );
   }
-}
 
-export default widgetWrapper([ 'app' ])(A10Form);
+}
+export default A10Form;

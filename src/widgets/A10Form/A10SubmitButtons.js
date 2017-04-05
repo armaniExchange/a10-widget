@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, FormGroup, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 // import { setLastPageVisible } from '';
-import { HIDE_COMPONENT_MODAL, REDIRECT_ROUTE } from './configs/messages';
+// import { HIDE_COMPONENT_MODAL, REDIRECT_ROUTE } from 'configs/messages';
 
 export class A10SubmitButtons extends Component {
+  static displayName ='A10SubmitButtons';
+
   buttons = {
     create: ({ submitting }, index) => {
       return (
@@ -40,12 +42,14 @@ export class A10SubmitButtons extends Component {
   }
 
   close() {
+    const { onClose } = this.props;
+    onClose && onClose();
     // console.log('Close ... ', this.props, this.context.props);
-    if (this.props.modal) {
-      this.props.kickBall(HIDE_COMPONENT_MODAL, null, this.props.instancePath);
-    } else {
-      this.props.kickBall(REDIRECT_ROUTE, { path: 'list' });
-    }
+    // if (this.props.modal) {
+    //   this.props.kickBall(HIDE_COMPONENT_MODAL, null, this.props.instancePath);
+    // } else {
+    //   this.props.kickBall(REDIRECT_ROUTE, { path: 'list' });
+    // }
   }
 
   // submit() {

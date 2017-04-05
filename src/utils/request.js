@@ -72,3 +72,14 @@ export const getNextPageURL = (location, newPage=0) => {
   let path = location.pathname.replace(/\/$/, '');
   return `${path}/${query}`;
 };
+
+export function querystring2obj(qs) {
+  if (!qs) return {};
+  const str = qs.substring(1);
+  const result = {};
+  str.split('&').reduce((result, seg) => {
+    const data = seg.split('=');
+    result[data[0]] = data[1] || null;
+  }, result);
+  return result;
+}
