@@ -73,16 +73,24 @@ class A10Form extends Component {
 
   checkConditional = (conditional) => {
     const { data } = this.state;
-    for (const key in conditional) {
-      if (!conditional.hasOwnProperty(key)) continue;
-      const currentVal = data.getIn(key.split('.'));
-      // FIXME
-      if (currentVal != conditional[key] &&
-        !(currentVal == undefined && conditional[key] == false)) {
-        return false;
+    if (typeof conditional === 'string') {
+      const currentVal = data.getIn(conditional.split('.'));
+      if (currentVal) {
+        return true;
       }
+      return false;
+    } else {
+      for (const key in conditional) {
+        if (!conditional.hasOwnProperty(key)) continue;
+        const currentVal = data.getIn(key.split('.'));
+        // FIXME
+        if (currentVal != conditional[key] &&
+          !(currentVal == undefined && conditional[key] == false)) {
+          return false;
+        }
+      }
+      return true;
     }
-    return true;
   }
 
   initData = child => {
@@ -103,6 +111,7 @@ class A10Form extends Component {
         return ele;
       } else if (Object.getPrototypeOf(ele.type) == A10BaseField) {
         const { conditional, linkFrom, linkTo, value, name } = ele.props;
+        console.log(conditional, name);
         if (conditional && !this.checkConditional(conditional)) return null;
         const currentVal = data.getIn(name.split('.'));
         const newProps = {
