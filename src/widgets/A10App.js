@@ -7,8 +7,7 @@ class A10App extends Component {
   static displayName = 'A10App';
 
   static childContextTypes = {
-    apiClient: PropTypes.object.isRequired,
-    router: PropTypes.object.isRequired
+    apiClient: PropTypes.object.isRequired
   };
 
   static propTypes = {
@@ -24,8 +23,7 @@ class A10App extends Component {
         post: this.getAPIRequest.bind(this, 'post'),
         put: this.getAPIRequest.bind(this, 'put'),
         del: this.getAPIRequest.bind(this, 'del')
-      },
-      router: this.context.router || {}
+      }
     };
   }
 
@@ -59,7 +57,7 @@ class A10App extends Component {
         throw new Error(errMsg);
       }
     });
-  }
+  };
 
   render() {
     return (

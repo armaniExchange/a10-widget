@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Form } from 'react-bootstrap';
 import { Map, fromJS } from 'immutable';
+import { createValidationFuncs } from 'a10-widget-lib';
 
 import A10BaseField from '../A10Field/A10BaseField';
 
@@ -9,8 +10,7 @@ class A10Form extends Component {
   static displayName = 'A10Form';
 
   static contextTypes = {
-    apiClient: PropTypes.object.isRequired,
-    router: PropTypes.object.isRequired
+    apiClient: PropTypes.object.isRequired
   };
 
   static defaultProps = {
@@ -22,10 +22,10 @@ class A10Form extends Component {
     children: PropTypes.any.isRequired,
     primaryId: PropTypes.string,
     action: PropTypes.string,
-    method: PropTypes.string,
     params: PropTypes.object,
     onSuccess: PropTypes.func,
-    onFail: PropTypes.func
+    onFail: PropTypes.func,
+    schema: PropTypes.string
   };
 
   constructor(props) {
@@ -34,6 +34,9 @@ class A10Form extends Component {
       data: Map()
     };
     this.fieldCount = 0;
+    if (props.schema) {
+      this.schema = require(`a10-schemas/src/${props.schema}.json`);
+    }
   }
 
   onSubmit = e => {
@@ -57,9 +60,10 @@ class A10Form extends Component {
       onSubmit(result, e);
     } else {
       const { apiClient } = this.context;
-      const { action, method, onSuccess, params, primaryId } = this.props;
+      const { onSuccess, params, primaryId } = this.props;
+      const action = this.props.action ? this.props.action : this.schema.axapi.replace(/{.*}/g, '');
       const url = primaryId ? `${action}${primaryId}` : action;
-      apiClient[method](url, result, params).then(res => {
+      apiClient[primaryId ? 'put' : 'post'](url, result, params).then(res => {
         onSuccess(res);
       });
     }
@@ -109,19 +113,32 @@ class A10Form extends Component {
       if (!React.isValidElement(ele)) {
         return ele;
       } else if (Object.getPrototypeOf(ele.type) == A10BaseField) {
-        const { conditional, linkFrom, linkTo, value, name } = ele.props;
+        const { conditional, linkFrom, linkTo, value, name, validation } = ele.props;
         if (conditional && !this.checkConditional(conditional)) return null;
-        const currentVal = data.getIn(name.split('.'));
-        const newProps = {
+        const keys = name.split('.');
+        const currentVal = data.getIn(keys);
+
+        let validations = null;
+        if (this.schema) {
+          const fieldSchema = this.schema.properties[keys[keys.length - 1]];
+          if (fieldSchema) {
+            const validationFuncs = createValidationFuncs(fieldSchema);
+            validations = {};
+            Object.keys(fieldSchema).forEach(key => {
+              if (validationFuncs[key] !== undefined) {
+                validations[key] = validationFuncs[key];
+              } else if (key === 'format' && validationFuncs[fieldSchema[key]] !== undefined) {
+                validations[fieldSchema[key]] = validationFuncs[fieldSchema[key]];
+              }
+            });
+          }
+        }
+        return React.cloneElement(ele, {
           onChange: this.updateField,
           ref: `field${this.fieldCount++}`,
-          value: currentVal || value || ''
-        };
-        // console.log(name, currentVal, name.split('.'), data);
-        // if (linkFrom) {
-        //   newProps.linkData[linkTo] = this.state.data.getIn(linkFrom.split('.'));
-        // }
-        return React.cloneElement(ele, newProps);
+          value: currentVal || value || '',
+          validation: validations || validation
+        });
       } else if (ele.props.children) {
         return React.cloneElement(ele, {
           children: this.recursiveCloneA10Field(ele.props.children)

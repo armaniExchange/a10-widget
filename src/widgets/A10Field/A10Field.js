@@ -18,7 +18,10 @@ class A10Field extends A10BaseField {
     required: PropTypes.any,
     children: PropTypes.any,
     placeholder: PropTypes.string,
-    validation: PropTypes.func,
+    validation: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object
+    ]),
     inline: PropTypes.any,
     onChange: PropTypes.func,
     ...FormControl.propTypes
@@ -35,17 +38,30 @@ class A10Field extends A10BaseField {
 
   valueVerify = (e) => {
     const { value } = e.target;
-    const { componentClass, validation } = this.props;
+    const { componentClass, validation, name } = this.props;
     const { errMsg } = this.state;
 
     if (componentClass === 'checkbox' || componentClass === 'radio') return;
     if (!validation) return;
 
-    const failMsg = validation(value);
-    if (failMsg) {
-      this.setState({ errMsg: failMsg });
-    } else if (failMsg !== errMsg) {
-      this.setState({ errMsg: failMsg });
+    if (typeof validation === 'function') {
+      const failMsg = validation(value);
+      if (failMsg && failMsg !== errMsg) {
+        this.setState({ errMsg: failMsg });
+      } else if (!failMsg) {
+        this.setState({ errMsg: null });
+      }
+    } else {
+      const validationKeys = Object.keys(validation);
+      for (let i = 0; i < validationKeys.length; i++) {
+        const failMsg = validation[validationKeys[i]](value);
+        if (failMsg && failMsg !== errMsg) {
+          this.setState({ errMsg: failMsg });
+          return;
+        } else if (!failMsg) {
+          this.setState({ errMsg: null });
+        }
+      }
     }
   };
 
@@ -89,6 +105,7 @@ class A10Field extends A10BaseField {
           React.Children.map(children, (child, index) => {
             const newProps = {
               onChange: this.onChange,
+              onBlur: this.onBlur,
               ref: `field${index}`
             };
             if (child.type.name === 'A10Checkbox' || child.type.name === 'Checkbox') {
