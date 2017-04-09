@@ -78,6 +78,12 @@ class A10Field extends A10BaseField {
     this.valueVerify(e);
   };
 
+  hasError() {
+    const { errMsg } = this.state;
+    if (errMsg) return true;
+    return false;
+  };
+
   get value() {
     const { children, value } = this.props;
     if (this.type === 'checkbox') {
