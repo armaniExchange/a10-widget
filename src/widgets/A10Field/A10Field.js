@@ -46,7 +46,7 @@ class A10Field extends A10BaseField {
 
     if (typeof validation === 'function') {
       const failMsg = validation(value);
-      if (failMsg && failMsg !== errMsg) {
+      if (failMsg && failMsg.length && failMsg !== errMsg) {
         this.setState({ errMsg: failMsg });
       } else if (!failMsg) {
         this.setState({ errMsg: null });
@@ -55,13 +55,14 @@ class A10Field extends A10BaseField {
       const validationKeys = Object.keys(validation);
       for (let i = 0; i < validationKeys.length; i++) {
         const failMsg = validation[validationKeys[i]](value);
-        if (failMsg && failMsg !== errMsg) {
-          this.setState({ errMsg: failMsg });
+        if (failMsg && failMsg.length) {
+          if (failMsg !== errMsg) {
+            this.setState({ errMsg: failMsg });
+          }
           return;
-        } else if (!failMsg) {
-          this.setState({ errMsg: null });
         }
       }
+      this.setState({ errMsg: null });
     }
   };
 
@@ -75,6 +76,12 @@ class A10Field extends A10BaseField {
 
   onBlur = e => {
     this.valueVerify(e);
+  };
+
+  hasError() {
+    const { errMsg } = this.state;
+    if (errMsg) return true;
+    return false;
   };
 
   get value() {

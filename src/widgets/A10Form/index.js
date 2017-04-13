@@ -47,6 +47,7 @@ class A10Form extends Component {
     let result = Map();
     for (let i = 0; i < this.fieldCount; i++) {
       const ele = this.refs[`field${i}`];
+      if (ele.hasError()) return;
       const { name, value: defaultValue, notRegular } = ele.props;
       const key = name.split('.');
       const value = data.getIn(key);
