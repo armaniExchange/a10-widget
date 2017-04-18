@@ -85,7 +85,7 @@ class A10Field extends A10BaseField {
   };
 
   get value() {
-    const { children, value } = this.props;
+    const { children } = this.props;
     if (this.type === 'checkbox') {
       if (typeof children === 'object') return this.refs['field0'].checked ? 1 : 0;
       const result = [];
@@ -100,7 +100,7 @@ class A10Field extends A10BaseField {
         if (ele.checked) return ele.value;
       }
     }
-    return this.refs['field0'].value;
+    return this.refs && this.refs['field0'] && this.refs['field0'].value;
   }
 
   renderFieldInput = () => {
