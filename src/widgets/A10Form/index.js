@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Form } from 'react-bootstrap';
 import { Map, fromJS } from 'immutable';
-import { createValidationFuncs } from 'a10-widget-lib';
+import { createValidationFuncs } from '@a10/a10-widget-lib';
 
 import A10BaseField from '../A10Field/A10BaseField';
 
@@ -35,7 +35,7 @@ class A10Form extends Component {
     };
     this.fieldCount = 0;
     if (props.schema) {
-      this.schema = require(`a10-schemas/src/${props.schema}.json`);
+      this.schema = require(`@a10/a10-schemas/src/${props.schema}.json`);
     }
   }
 
