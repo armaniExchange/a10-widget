@@ -56,9 +56,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "better-npm-run": "0.0.11",
-    "clean-webpack-plugin": "^0.1.10",
     "css-loader": "^0.23.1",
-    "es6-promise-promise": "^1.0.0",
     "eslint": "^3.4.0",
     "eslint-plugin-react": "^6.2.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
@@ -83,7 +81,8 @@
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^2.1.0-beta",
-    "webpack-hot-middleware": "^2.13.2"
+    "webpack-hot-middleware": "^2.13.2",
+    "react-bootstrap": "^0.30.2"
   },
   "dependencies": {
     "immutable": "^3.8.1",
@@ -91,14 +90,8 @@
     "jsoneditor": "^5.5.6",
     "lodash": "^4.15.0",
     "moment": "^2.14.1",
-    "rc-slider": "^5.4.3",
-    "react-addons-shallow-compare": "^15.4.2",
-    "react-bootstrap": "^0.30.2",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
-    "react-select": "^1.0.0-rc.3",
-    "react-tagsinput": "^3.14.0",
-    "react-virtualized-select": "^2.3.0",
     "redux-immutable": "^3.0.8",
     "redux-thunk": "^2.1.0",
     "superagent": "^2.1.0",
@@ -109,6 +102,7 @@
     "react-dom": "^15.4.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
-    "redux-immutable": "^3.0.8"
+    "redux-immutable": "^3.0.8",
+    "react-bootstrap": "^0.30.2"
   }
 }
