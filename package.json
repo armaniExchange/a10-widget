@@ -1,5 +1,5 @@
 {
-  "name": "@a10/a10-widget",
+  "name": "a10-widget",
   "version": "0.0.1",
   "description": "A10 GUI Widget Library",
   "author": "Zuoping Li",
@@ -44,8 +44,8 @@
     }
   },
   "devDependencies": {
-    "@a10/a10-schemas": "0.0.1",
-    "@a10/a10-widget-lib": "0.0.1",
+    "a10-schemas": "0.0.1",
+    "a10-widget-lib": "0.0.1",
     "babel-core": "^6.6.5",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
